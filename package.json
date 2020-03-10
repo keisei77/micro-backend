@@ -1,0 +1,27 @@
+{
+  "name": "create-next-example-app",
+  "description": "A Next.js starter app.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeit/now/tree/master/examples/nextjs"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env node server.js",
+    "start": "cross-env SENTRY_DSN=https://7d32be8e7b374c4ca264809345b0f2cc@sentry.io/1878555 NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "@sentry/browser": "^5.13.2",
+    "@sentry/integrations": "^5.13.2",
+    "@sentry/node": "^5.13.2",
+    "@zeit/next-source-maps": "^0.0.3",
+    "cookie-parser": "^1.4.4",
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "js-cookie": "^2.2.1",
+    "puppeteer": "^2.1.1",
+    "sentry-testkit": "^3.2.1",
+    "uuid": "^7.0.2"
+  }
+}
