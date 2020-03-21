@@ -1,9 +1,10 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const { v4: uuidv4 } = require('uuid');
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = parseInt(process.env.PORT, 10) || 4000;
 const dev = process.env.NODE_ENV !== 'production';
 const ncovHandler = require('./route/ncov');
+const weiboHandler = require('./route/weibo');
 
 function sessionCookie(req, res, next) {
   const htmlPage =
@@ -53,6 +54,7 @@ server
   .use(Sentry.Handlers.errorHandler());
 
 server.get('/api/ncov', ncovHandler);
+server.get('/api/weibo', weiboHandler);
 server.listen(port, err => {
   if (err) {
     throw err;
