@@ -1,7 +1,10 @@
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
-module.exports = async (_req, res) => {
+module.exports = async (req, res) => {
+  const page = req.query.page ? Number(req.query.page) : 1;
+  const pageSize = req.query.size ? Number(req.query.size) : 5;
+
   try {
     const topics = await fetch('https://s.weibo.com/top/summary/').then(res =>
       res.text()
@@ -13,14 +16,16 @@ module.exports = async (_req, res) => {
 
     const topicsData = [];
 
-    list.each((_index, element) => {
-      const node = $(element).find('a');
-      const title = node.text();
-      const relatedUrl = node.attr('href').startsWith('/weibo')
-        ? node.attr('href')
-        : '';
-      const link = `https://s.weibo.com${relatedUrl}`;
-      topicsData.push({ title, link });
+    list.each((index, element) => {
+      if (index + 1 > (page - 1) * pageSize && index < page * pageSize) {
+        const node = $(element).find('a');
+        const title = node.text();
+        const relatedUrl = node.attr('href').startsWith('/weibo')
+          ? node.attr('href')
+          : '';
+        const link = `https://s.weibo.com${relatedUrl}`;
+        topicsData.push({ title, link });
+      }
     });
 
     for (let index = 0; index < topicsData.length; index++) {
