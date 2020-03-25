@@ -53,6 +53,18 @@ server
   // This handles errors if they are thrown before reaching the app
   .use(Sentry.Handlers.errorHandler());
 
+// https://stackoverflow.com/questions/43915577/nodejs-express-heroku-cors
+server.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
+  );
+  next();
+});
+
 server.get('/api/ncov', ncovHandler);
 server.get('/api/weibo', weiboHandler);
 server.listen(port, err => {
