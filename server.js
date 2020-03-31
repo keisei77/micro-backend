@@ -5,6 +5,7 @@ const port = parseInt(process.env.PORT, 10) || 4000;
 const dev = process.env.NODE_ENV !== 'production';
 const ncovHandler = require('./route/ncov');
 const weiboHandler = require('./route/weibo');
+const weiboDetailHandler = require('./route/weiboDetail');
 
 function sessionCookie(req, res, next) {
   const htmlPage =
@@ -67,6 +68,7 @@ server.use(function(req, res, next) {
 
 server.get('/api/ncov', ncovHandler);
 server.get('/api/weibo', weiboHandler);
+server.get('/api/weibo-detail', weiboDetailHandler);
 server.listen(port, err => {
   if (err) {
     throw err;
