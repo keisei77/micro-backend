@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
 module.exports = async (req, res) => {
-  const link = encodeURI(req.query.link) || '';
+  const link = req.query.link.replace(/#/g, '%23') || '';
   console.log(link);
   const topicInfo = {};
   try {
