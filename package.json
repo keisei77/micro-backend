@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env node server.js",
+    "dev": "cross-env nodemon server.js",
     "start": "cross-env SENTRY_DSN=https://7d32be8e7b374c4ca264809345b0f2cc@sentry.io/1878555 NODE_ENV=production node server.js"
   },
   "dependencies": {

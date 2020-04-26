@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   const topicInfo = {};
   try {
     if (link) {
-      const topic = await fetch(link).then(res => res.text());
+      const topic = await fetch(link).then((res) => res.text());
 
       const $_topic = cheerio.load(topic);
 
@@ -28,10 +28,18 @@ module.exports = async (req, res) => {
             .text()
             .trim()
             .slice(0, -6) ||
-          $_topic('p[node-type=feed_list_content]', element)
-            .text()
-            .trim();
-        feedContent.push(content);
+          $_topic('p[node-type=feed_list_content]', element).text().trim();
+        const images = [];
+        const imageSource = $_topic(
+          'div[node-type=feed_list_media_prev]',
+          element
+        );
+        imageSource.each((_imageIdx, imageEl) => {
+          const imgEl = $_topic('ul li img', imageEl);
+          const imgSrc = imgEl.attr('src');
+          images.push(imgSrc);
+        });
+        feedContent.push({ content, images });
       });
       topicInfo['lead'] = lead;
       topicInfo['feedContent'] = feedContent;
@@ -40,7 +48,7 @@ module.exports = async (req, res) => {
     res.json(topicInfo);
   } catch (error) {
     res.status(400).json({
-      error: error.message
+      error: error.message,
     });
   }
 };
