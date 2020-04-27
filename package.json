@@ -23,6 +23,7 @@
     "js-cookie": "^2.2.1",
     "node-fetch": "^2.6.0",
     "puppeteer": "^2.1.1",
+    "request": "^2.88.2",
     "sentry-testkit": "^3.2.1",
     "uuid": "^7.0.2"
   }

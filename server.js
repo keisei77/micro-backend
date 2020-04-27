@@ -6,6 +6,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const ncovHandler = require('./route/ncov');
 const weiboHandler = require('./route/weibo');
 const weiboDetailHandler = require('./route/weiboDetail');
+const weiboAssetsHandler = require('./route/weiboAssets');
 
 function sessionCookie(req, res, next) {
   const htmlPage =
@@ -26,7 +27,7 @@ function sessionCookie(req, res, next) {
   next();
 }
 
-const sourcemapsForSentryOnly = token => (req, res, next) => {
+const sourcemapsForSentryOnly = (token) => (req, res, next) => {
   // In production we only want to serve source maps for Sentry
   if (!dev && !!token && req.headers['x-sentry-token'] !== token) {
     res
@@ -55,7 +56,7 @@ server
   .use(Sentry.Handlers.errorHandler());
 
 // https://stackoverflow.com/questions/43915577/nodejs-express-heroku-cors
-server.use(function(req, res, next) {
+server.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -69,7 +70,8 @@ server.use(function(req, res, next) {
 server.get('/api/ncov', ncovHandler);
 server.get('/api/weibo', weiboHandler);
 server.get('/api/weibo-detail', weiboDetailHandler);
-server.listen(port, err => {
+server.get('/assets', weiboAssetsHandler);
+server.listen(port, (err) => {
   if (err) {
     throw err;
   }
