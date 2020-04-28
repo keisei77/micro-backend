@@ -31,13 +31,22 @@ module.exports = async (req, res) => {
           $_topic('p[node-type=feed_list_content]', element).text().trim();
         const images = [];
         const imageSource = $_topic(
-          'div[node-type=feed_list_media_prev]',
+          'div[node-type=feed_list_media_prev] li',
           element
         );
         imageSource.each((_imageIdx, imageEl) => {
-          const imgEl = $_topic('ul li img', imageEl);
+          const imgEl = $_topic('img', imageEl);
           const imgSrc = imgEl.attr('src');
-          images.push(imgSrc);
+          const thumbSrcFragment = imgSrc.split('/');
+          const originSrc =
+            thumbSrcFragment.length === 5
+              ? thumbSrcFragment
+                  .slice(0, 3)
+                  .concat('bmiddle')
+                  .concat(thumbSrcFragment.slice(4))
+                  .join('/')
+              : imgSrc;
+          images.push(originSrc);
         });
         feedContent.push({ content, images });
       });
