@@ -36,8 +36,8 @@ module.exports = async (req, res) => {
         );
         imageSource.each((_imageIdx, imageEl) => {
           const imgEl = $_topic('img', imageEl);
-          const imgSrc = imgEl.attr('src');
-          const thumbSrcFragment = imgSrc.split('/');
+          const thumbSrc = imgEl.attr('src');
+          const thumbSrcFragment = thumbSrc.split('/');
           const originSrc =
             thumbSrcFragment.length === 5
               ? thumbSrcFragment
@@ -45,8 +45,8 @@ module.exports = async (req, res) => {
                   .concat('bmiddle')
                   .concat(thumbSrcFragment.slice(4))
                   .join('/')
-              : imgSrc;
-          images.push(originSrc);
+              : thumbSrc;
+          images.push({ thumbSrc, originSrc });
         });
         feedContent.push({ content, images });
       });
