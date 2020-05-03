@@ -48,7 +48,18 @@ module.exports = async (req, res) => {
               : thumbSrc;
           images.push({ thumbSrc, originSrc });
         });
-        feedContent.push({ content, images });
+        let video = '';
+        try {
+          const videoSource = $_topic('a[node-type=fl_h5_video]', element);
+          const videoData = videoSource.attr('action-data');
+          video = videoData
+            ? videoData
+                .split('&')
+                .find((_) => _.startsWith('video_src'))
+                .slice('video_src'.length + 1)
+            : '';
+        } catch (err) {}
+        feedContent.push({ content, images, video });
       });
       topicInfo['lead'] = lead;
       topicInfo['feedContent'] = feedContent;

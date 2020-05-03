@@ -7,6 +7,7 @@ const ncovHandler = require('./route/ncov');
 const weiboHandler = require('./route/weibo');
 const weiboDetailHandler = require('./route/weiboDetail');
 const weiboAssetsHandler = require('./route/weiboAssets');
+const bodyParser = require('body-parser');
 
 function sessionCookie(req, res, next) {
   const htmlPage =
@@ -45,6 +46,12 @@ const { Sentry } = require('./utils/sentry')();
 
 const server = express();
 // This attaches request information to Sentry errors
+
+// parse application/x-www-form-urlencoded
+server.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+server.use(bodyParser.json());
 
 server
   .use(Sentry.Handlers.requestHandler())
