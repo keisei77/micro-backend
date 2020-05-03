@@ -7,14 +7,16 @@
   },
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env nodemon server.js",
-    "start": "cross-env SENTRY_DSN=https://7d32be8e7b374c4ca264809345b0f2cc@sentry.io/1878555 NODE_ENV=production node server.js"
+    "dev": "cross-env nodemon --exec babel-node src/server.js",
+    "build": "rimraf dist && babel src --out-dir dist",
+    "start": "yarn build && cross-env SENTRY_DSN=https://7d32be8e7b374c4ca264809345b0f2cc@sentry.io/1878555 NODE_ENV=production node dist/server.js"
   },
   "dependencies": {
     "@sentry/browser": "^5.13.2",
     "@sentry/integrations": "^5.13.2",
     "@sentry/node": "^5.13.2",
     "@zeit/next-source-maps": "^0.0.3",
+    "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "^1.4.4",
     "cross-env": "^7.0.2",
@@ -24,7 +26,14 @@
     "node-fetch": "^2.6.0",
     "puppeteer": "^2.1.1",
     "request": "^2.88.2",
+    "rimraf": "^3.0.2",
     "sentry-testkit": "^3.2.1",
     "uuid": "^7.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6"
   }
 }
