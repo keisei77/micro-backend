@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "cross-env nodemon --exec babel-node src/server.js",
     "build": "rimraf dist && ./node_modules/.bin/babel src --out-dir dist",
-    "start": "yarn build && cross-env SENTRY_DSN=https://7d32be8e7b374c4ca264809345b0f2cc@sentry.io/1878555 NODE_ENV=production node dist/server.js"
+    "start": "cross-env SENTRY_DSN=https://7d32be8e7b374c4ca264809345b0f2cc@sentry.io/1878555 NODE_ENV=production node dist/server.js"
   },
   "dependencies": {
     "@sentry/browser": "^5.13.2",
