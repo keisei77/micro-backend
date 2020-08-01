@@ -7,6 +7,7 @@ const ncovHandler = require('./route/ncov');
 const weiboHandler = require('./route/weibo');
 const weiboDetailHandler = require('./route/weiboDetail');
 const weiboAssetsHandler = require('./route/weiboAssets');
+const weiboLargeAssetsHandler = require('./route/weiboLargeAssets');
 const bodyParser = require('body-parser');
 
 function sessionCookie(req, res, next) {
@@ -78,6 +79,7 @@ server.get('/api/ncov', ncovHandler);
 server.get('/api/weibo', weiboHandler);
 server.get('/api/weibo-detail', weiboDetailHandler);
 server.get('/assets', weiboAssetsHandler);
+server.get('/assets-large', weiboLargeAssetsHandler);
 server.listen(port, (err) => {
   if (err) {
     throw err;

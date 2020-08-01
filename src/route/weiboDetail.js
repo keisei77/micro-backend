@@ -23,6 +23,11 @@ module.exports = async (req, res) => {
 
       const feedContent = [];
       feedItems.each((_index, element) => {
+        const avatar = $_topic('.avator img', element).attr('src');
+        const nickname = $_topic(
+          'p[node-type=feed_list_content]',
+          element
+        ).attr('nick-name');
         const content =
           $_topic('p[node-type=feed_list_content_full]', element)
             .text()
@@ -34,17 +39,22 @@ module.exports = async (req, res) => {
           'div[node-type=feed_list_media_prev] li',
           element
         );
+        const mid = $_topic(element).attr('mid');
         imageSource.each((_imageIdx, imageEl) => {
           const imgEl = $_topic('img', imageEl);
+          const actionData = imgEl
+            .attr('action-data')
+            .split('&')
+            .reduce((acc, curr) => {
+              const [key, value] = curr.split('=');
+              acc[key] = value;
+              return acc;
+            }, {});
+          const { uid, pic_id: pid } = actionData;
           const thumbSrc = imgEl.attr('src');
-          const thumbSrcFragment = thumbSrc.split('/');
           const originSrc =
-            thumbSrcFragment.length === 5
-              ? thumbSrcFragment
-                  .slice(0, 3)
-                  .concat('bmiddle')
-                  .concat(thumbSrcFragment.slice(4))
-                  .join('/')
+            uid && mid && pid
+              ? `https://photo.weibo.com/${uid}/wbphotos/large/mid/${mid}/pid/${pid}?Refer=weibofeedv5`
               : thumbSrc;
           images.push({ thumbSrc, originSrc });
         });
@@ -59,7 +69,12 @@ module.exports = async (req, res) => {
                 .slice('video_src'.length + 1)
             : '';
         } catch (err) {}
-        feedContent.push({ content, images, video });
+        feedContent.push({
+          userInfo: { avatar, nickname },
+          content,
+          images,
+          video,
+        });
       });
       topicInfo['lead'] = lead;
       topicInfo['feedContent'] = feedContent;
