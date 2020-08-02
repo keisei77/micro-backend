@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
             }, {});
           const { uid, pic_id: pid } = actionData;
           const thumbSrc = imgEl.attr('src');
-          const originSrc = thumbSrc.replace('thumb150', 'large');
+          const originSrc = thumbSrc.replace(/orj480|orj360|thumb150/, 'large');
           images.push({ thumbSrc, originSrc });
         });
         let video = '';
