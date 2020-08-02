@@ -52,10 +52,7 @@ module.exports = async (req, res) => {
             }, {});
           const { uid, pic_id: pid } = actionData;
           const thumbSrc = imgEl.attr('src');
-          const originSrc =
-            uid && mid && pid
-              ? `https://photo.weibo.com/${uid}/wbphotos/large/mid/${mid}/pid/${pid}?Refer=weibofeedv5`
-              : thumbSrc;
+          const originSrc = thumbSrc.replace('thumb150', 'large');
           images.push({ thumbSrc, originSrc });
         });
         let video = '';
