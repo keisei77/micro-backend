@@ -3323,10 +3323,10 @@ uuid@^3.3.2:
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=
 
-uuid@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.npm.taobao.org/uuid/download/uuid-7.0.2.tgz?cache=0&sync_timestamp=1583326207173&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-7.0.2.tgz#7ff5c203467e91f5e0d85cfcbaaf7d2ebbca9be6"
-  integrity sha1-f/XCA0Z+kfXg2Fz8uq99LrvKm+Y=
+uuid@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
+  integrity sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
 
 v8flags@^3.1.1:
   version "3.1.3"
