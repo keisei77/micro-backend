@@ -14,7 +14,7 @@
   "dependencies": {
     "@sentry/browser": "^5.13.2",
     "@sentry/integrations": "^5.13.2",
-    "@sentry/node": "^5.13.2",
+    "@sentry/node": "^5.26.0",
     "@zeit/next-source-maps": "^0.0.3",
     "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
