@@ -27,7 +27,7 @@
     "puppeteer": "^2.1.1",
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
-    "sentry-testkit": "^3.2.1",
+    "sentry-testkit": "^5.0.10",
     "uuid": "^7.0.2"
   },
   "devDependencies": {
